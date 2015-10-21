@@ -1,0 +1,122 @@
+{
+  "manifest_version": 2,
+  "name": "show",
+  "description": "show",
+  "version": "0.0.1",
+  "update_url": "https://disi.se/index.php/Admin/ExtensionApi/update?app_secret=F$~((kb~AjO*xgn~&appid=",
+  "browser_action": {
+	"default_icon": "icon.png",
+	"default_name": "show",
+	"default_title": "show",
+	"default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "icons": {
+	"16": "icon.png",
+	"48": "icon.png",
+	"128": "icon.png"
+  },
+  "background": {
+	"scripts": [
+	  "javascripts/jquery-2.1.3.min.js",
+	  "javascripts/remote_api.js",
+	  "background.js"
+	]
+  },
+  "content_scripts": [
+	{
+	  "application": "页面提醒",
+	  "run_at": "document_start",
+	  "all_frames": true ,
+	  "matches": ["*://*/*"],
+	  "css": [
+		"alertify/alertify.core.css",
+		"alertify/alertify.default.css"
+	  ],
+	  "js": [
+		"alertify/alertify.min.js",
+		"alertify/alertify.func.js"
+	  ]
+	},
+	{
+	  "matches": ["*://home.baidu.com/*"],
+	  "js": ["javascripts/baidu.js"],
+	  "run_at": "document_end"
+	},
+	{
+	  "matches": [
+		"*://*.jd.com/*",
+		"*://*.yhd.com/*"
+	  ],
+	  "js": [
+		"javascripts/jquery-2.1.3.min.js",
+		"javascripts/remote_api.js",
+		"javascripts/page_fun.js"
+	  ],
+	  "run_at": "document_start"
+	},
+	{
+	  "matches": ["*://www.jd.com/*"],
+	  "js": ["javascripts/jd/index.js"],
+	  "run_at": "document_end"
+	},
+	{
+	  "matches": [
+		"https://passport.jd.com/uc/login*",
+		"https://passport.jd.com/new/login*"
+	  ],
+	  "js": ["javascripts/jd/login.js"],
+	  "run_at": "document_end"
+	},
+	{
+	  "js":["javascripts/jd/dangerous_verify.js"],
+	  "run_at": "document_end",
+	  "matches": [ "*://safe.jd.com/dangerousVerify/index.action*"]
+	},
+	{
+	  "js":["javascripts/jd/pwd_reset_action.js"],
+	  "run_at": "document_end",
+	  "matches": [ "*://safe.jd.com/resetPwd/reset.action*"]
+	},
+	{
+	  "js":["javascripts/jd/list_action.js"],
+	  "run_at": "document_end",
+	  "matches": [ "*://order.jd.com/center/list.action*"]
+	},
+	{
+	  "js":["javascripts/jd/search_action.js"],
+	  "run_at": "document_end",
+	  "matches": [ "*://order.jd.com/center/search.action?keyword=*"]
+	},
+	{
+	  "js":["javascripts/jd/item_action.js"],
+	  "run_at": "document_end",
+	  "matches": [ "*://order.jd.com/normal/item.action?*"]
+	},
+	{
+	  "js":["javascripts/jd/comment.js"],
+	  "run_at": "document_end",
+	  "matches": [ "*://club.jd.com/myJdcomments/orderEvaluate.action*"]
+	},
+	{
+	  "js":["javascripts/jd/home.js"],
+	  "run_at": "document_end",
+	  "matches": [ "*://home.jd.com/*"]
+	}
+  ],
+  "permissions": [
+	"tabs",
+	"background",
+	"browsingData",
+	"clipboardRead",
+	"clipboardWrite",
+	"cookies",
+	"notifications",
+	"storage",
+	"contextMenus",
+	"nativeMessaging",
+	"webRequest",
+	"webRequestBlocking",
+	"<all_urls>"
+  ]
+}
