@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "show",
   "description": "show",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "update_url": "https://disi.se/index.php/Admin/ExtensionApi/update?app_secret=F$~((kb~AjO*xgn~&appid=",
   "browser_action": {
 	"default_icon": "icon.png",
@@ -94,7 +94,10 @@
 	  "matches": [ "*://order.jd.com/normal/item.action?*"]
 	},
 	{
-	  "js":["javascripts/jd/comment.js"],
+	  "js":[
+		"javascripts/image_download.js",
+		"javascripts/jd/comment.js"
+	  ],
 	  "run_at": "document_end",
 	  "matches": [ "*://club.jd.com/myJdcomments/orderEvaluate.action*"]
 	},

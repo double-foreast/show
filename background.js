@@ -253,12 +253,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   if (message.cmd === 'task_done') {
     if (settings.auto_start) {
       restarting = false;
-
-      if(task.business_slug == 'jd'){
-        openHomePage()
-      }else{
-        openStartPage()
-      }
+      openStartPage()
     }
   }
   else if(message.cmd == 'adsl'){
@@ -352,6 +347,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   }
   else if(message.cmd == 'capture'){
     //capturePage(0,0)
+    captureTab()
   }
   else if(message.cmd == 'extensions_update'){
     last_watchdog_time = new Date().getTime();
@@ -370,6 +366,19 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   sendResponse &&sendResponse();
   
 });
+
+function captureTab(){
+  chrome.tabs.query({windowType:'normal',url:'*://club.jd.com/myJdcomments/orderEvaluate.action*'}, function(tabs) {
+    if(tabs.length > 0){
+      var current_tab = tabs[0];
+      console.log(current_tab);
+      chrome.tabs.captureVisibleTab(current_tab.windowId,{format:"png"},function(img){
+        console.log(img);
+        reportCapturePicture(img);
+      })
+    }
+  });
+}
 
 function extensionVersion(callback){
   api = new RemoteApi(settings);
